@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { BoardComponent } from './board/board.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [BoardComponent],
+  template: `<app-board />`,
 })
 export class AppComponent {
   title = 'tic-tac-toe';
