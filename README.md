@@ -1,5 +1,17 @@
 # TicTacToe
 
+TicTacToe game built using Angular and demonstrates basic game logic, state management, and user interaction. Made to familiarize myself with Angular syntax.
+
+![Description of the image](blob/screenshot.png)
+
+## Features
+
+- Two-player gameplay (X and O)
+- Displays the current player
+- Tracks the number of wins for each player and draws
+- Option to start a new game
+- Responsive design
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
 ## Development server
