@@ -1,5 +1,7 @@
 # TicTacToe
 
+[DEMO](https://adiletbaimyrza.github.io/tic-tac-toe/)
+
 TicTacToe game built using Angular and demonstrates basic game logic, state management, and user interaction. Made to familiarize myself with Angular syntax.
 
 ![Description of the image](blob/screenshot.png)
