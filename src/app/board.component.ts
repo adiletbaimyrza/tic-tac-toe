@@ -27,7 +27,7 @@ import { ArrowCircleComponent } from './assets/arrow-circle.component';
     <h1>Current Player: {{ player }}</h1>
     }
 
-    <button (click)="newGame()">Start A New Game</button>
+    <button (click)="newGame()">Start a New Game</button>
 
     <main>
       @for (value of squares; track $index) {
@@ -54,10 +54,12 @@ import { ArrowCircleComponent } from './assets/arrow-circle.component';
 
     button {
       background:transparent;
+      font-family: "Swanky and Moo Moo";
+      font-weight: bold;
       padding: 5px;
       margin-top: 20px;
       margin-bottom: 20px;
-      font-size: 16px;
+      font-size: 22px;
       border-top-left-radius: 255px 15px;
       border-top-right-radius: 15px 225px;
       border-bottom-right-radius: 225px 15px;
@@ -146,6 +148,8 @@ export class BoardComponent {
     this.xWins = 0;
     this.oWins = 0;
     this.draws = 0;
+
+    this.newGame();
   }
 
   get player() {
