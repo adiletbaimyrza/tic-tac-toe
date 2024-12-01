@@ -6,35 +6,35 @@ import { SquareComponent } from './square.component';
 @Component({
   selector: 'app-board',
   imports: [SquareComponent],
-  template: ` <h1>Current Player: {{ player }}</h1>
-
+  template: `
+    <h1>Current Player: {{ player }}</h1>
     <button (click)="newGame()">Start new Game</button>
 
-    @if (winner) {
+    @if (winner && winner !== 'Draw') {
     <h2>Player {{ winner }} won the game!</h2>
+    } @else if (winner && winner === 'Draw') {
+    <h2>This is a draw!</h2>
     }
 
     <main>
       @for (value of squares; track $index) {
-      <app-square [value]="value" (click)="makeMove($index)"> </app-square>
+      <app-square [value]="value" [index]="$index" (click)="makeMove($index)">
+      </app-square>
       }
-    </main>`,
+    </main>
+  `,
   styles: `main {
     display: grid;
-    grid-template-columns: 200px 200px 200px;
+    grid-template-columns: 160px 160px 160px;
     grid-gap: 0px;
-  }
-  
-  app-square {
-    border: 1px gray solid;
-    height: 200px;
   }
   `,
 })
 export class BoardComponent {
   squares: Array<Maybe<Square>> = Array(9).fill(undefined);
   xIsNext: boolean = true;
-  winner: Maybe<Square>;
+  winner: Maybe<Square | 'Draw'>;
+  turns: number = 0;
 
   constructor() {}
 
@@ -46,6 +46,7 @@ export class BoardComponent {
     this.squares = Array(9).fill(undefined);
     this.xIsNext = true;
     this.winner = undefined;
+    this.turns = 0;
   }
 
   get player() {
@@ -53,13 +54,18 @@ export class BoardComponent {
   }
 
   makeMove(idx: number) {
-    if (!this.squares[idx]) {
-      this.squares[idx] = this.player;
-      this.xIsNext = !this.xIsNext;
+    if (this.turns < 9 && this.winner === undefined) {
+      if (!this.squares[idx]) {
+        this.squares[idx] = this.player;
+        this.xIsNext = !this.xIsNext;
+      }
+
+      this.turns += 1;
+      this.winner = this.calculateWinner();
     }
   }
 
-  calculateWinner(): Square | null {
+  calculateWinner(): Maybe<Square | 'Draw'> {
     const lines: Array<Array<number>> = [
       [0, 1, 2],
       [3, 4, 5],
@@ -83,6 +89,8 @@ export class BoardComponent {
       }
     }
 
-    return null;
+    if (this.turns === 9) return 'Draw';
+
+    return;
   }
 }
