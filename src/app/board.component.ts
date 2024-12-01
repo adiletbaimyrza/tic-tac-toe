@@ -26,13 +26,14 @@ import { ArrowCircleComponent } from './assets/arrow-circle.component';
     } @else {
     <h1>Current Player: {{ player }}</h1>
     }
+
     <button (click)="newGame()">Start A New Game</button>
 
     <main>
       @for (value of squares; track $index) {
       <app-square [value]="value" (click)="makeMove($index)" />
-
       }
+
       <app-line1 />
       <app-line2 />
       <app-line3 />
