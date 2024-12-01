@@ -1,13 +1,35 @@
 import { Component } from '@angular/core';
-import { Square } from '../types/square';
-import { Maybe } from '../types/maybe';
-import { SquareComponent } from '../square/square.component';
+import { Square } from './types/square';
+import { Maybe } from './types/maybe';
+import { SquareComponent } from './square.component';
 
 @Component({
   selector: 'app-board',
   imports: [SquareComponent],
-  templateUrl: './board.component.html',
-  styleUrl: './board.component.scss',
+  template: ` <h1>Current Player: {{ player }}</h1>
+
+    <button (click)="newGame()">Start new Game</button>
+
+    @if (winner) {
+    <h2>Player {{ winner }} won the game!</h2>
+    }
+
+    <main>
+      @for (value of squares; track $index) {
+      <app-square [value]="value" (click)="makeMove($index)"> </app-square>
+      }
+    </main>`,
+  styles: `main {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-gap: 0px;
+  }
+  
+  app-square {
+    border: 1px gray solid;
+    height: 200px;
+  }
+  `,
 })
 export class BoardComponent {
   squares: Array<Maybe<Square>> = Array(9).fill(undefined);
